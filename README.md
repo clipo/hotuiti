@@ -58,11 +58,15 @@ hotuiti/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.7 or higher
+- Python 3.7-3.11 (tested with 3.10.13)
 - pip (Python package manager)
 - Git
 
-### Installation
+### Installation Methods
+
+Choose one of the following installation methods based on your preference:
+
+#### Method 1: Using pip (Recommended)
 
 1. **Clone the repository**
 ```bash
@@ -70,7 +74,7 @@ git clone https://github.com/clipo/hotuiti.git
 cd hotuiti
 ```
 
-2. **Create a virtual environment (recommended)**
+2. **Create a virtual environment**
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -81,12 +85,57 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+#### Method 2: Using Conda
+
+```bash
+git clone https://github.com/clipo/hotuiti.git
+cd hotuiti
+conda env create -f environment.yml
+conda activate hotuiti
+```
+
+#### Method 3: Using Docker
+
+```bash
+git clone https://github.com/clipo/hotuiti.git
+cd hotuiti
+docker-compose build
+docker-compose run moai-analysis
+```
+
+#### Method 4: Using pip install (Package Installation)
+
+```bash
+pip install git+https://github.com/clipo/hotuiti.git
+```
+
+### Reproducibility Files
+
+This project includes several files to ensure reproducible results:
+
+- **requirements.txt** - Pinned Python package versions for pip
+- **environment.yml** - Conda environment specification
+- **.python-version** - Python version for pyenv users (3.10.13)
+- **Dockerfile** - Container-based reproducible environment
+- **docker-compose.yml** - Docker orchestration configuration
+- **pyproject.toml** - Modern Python packaging configuration
+- **setup.py** - Traditional Python package setup
+
 ### Dependencies
-- **trimesh** ≥ 4.0.0 - 3D mesh processing
-- **numpy** ≥ 1.20.0 - Numerical computations
-- **matplotlib** ≥ 3.5.0 - 2D/3D plotting
-- **scipy** ≥ 1.7.0 - Scientific computing
-- **plotly** (optional) - Interactive visualizations
+
+Core dependencies with pinned versions for reproducibility:
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| **trimesh** | 4.0.10 | 3D mesh processing |
+| **numpy** | 1.24.4 | Numerical computations |
+| **scipy** | 1.11.4 | Scientific computing |
+| **matplotlib** | 3.8.2 | 2D/3D plotting |
+| **plotly** | 5.18.0 | Interactive visualizations |
+| **rtree** | 1.1.0 | Spatial indexing for trimesh |
+| **shapely** | 2.0.2 | Geometric operations |
+| **networkx** | 3.2.1 | Graph algorithms for trimesh |
+| **pillow** | 10.2.0 | Image processing |
 
 ## 💻 Usage
 
@@ -209,6 +258,7 @@ lean_angle = arctan(horizontal_offset / height)
 
 1. **ImportError: No module named 'trimesh'**
    - Solution: Ensure you've run `pip install -r requirements.txt`
+   - For conda users: `conda env create -f environment.yml`
 
 2. **Matplotlib backend issues**
    - Solution: Use `moai_analyzer_headless.py` or set backend:
@@ -216,12 +266,69 @@ lean_angle = arctan(horizontal_offset / height)
    import matplotlib
    matplotlib.use('Agg')
    ```
+   - Docker automatically sets MPLBACKEND=Agg
 
 3. **Memory errors with large meshes**
    - Solution: Use the simplified mesh provided or decimate in MeshLab
 
 4. **Plotly visualizations not showing**
-   - Solution: Ensure plotly is installed: `pip install plotly`
+   - Solution: Ensure plotly is installed: `pip install plotly==5.18.0`
+
+5. **Version conflicts**
+   - Solution: Use the exact versions in requirements.txt
+   - Or use Docker for a completely isolated environment
+
+6. **rtree installation fails**
+   - Solution: Install system dependencies first:
+   ```bash
+   # Ubuntu/Debian
+   sudo apt-get install libspatialindex-dev
+   
+   # macOS
+   brew install spatialindex
+   
+   # Windows
+   # Use conda or pre-built wheels
+   ```
+
+## 🐳 Docker Usage
+
+### Running with Docker
+
+1. **Build the image**
+```bash
+docker build -t hotuiti-analysis .
+```
+
+2. **Run analysis**
+```bash
+# Run default analysis
+docker run -v $(pwd)/output:/app/output hotuiti-analysis
+
+# Run specific script
+docker run -v $(pwd)/output:/app/output hotuiti-analysis python moai_analyzer_plotly.py
+
+# Interactive mode
+docker run -it -v $(pwd):/app hotuiti-analysis bash
+```
+
+3. **Using docker-compose**
+```bash
+# Build and run
+docker-compose up
+
+# Run in background
+docker-compose up -d
+
+# View logs
+docker-compose logs
+
+# Stop
+docker-compose down
+```
+
+### Output Files
+When using Docker, output files are saved to the `output/` directory which is mounted as a volume.
 
 ## 🤝 Contributing
 

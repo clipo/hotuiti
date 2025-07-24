@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  moai-analysis:
+    build: .
+    container_name: hotuiti-moai-analysis
+    volumes:
+      # Mount the output directory to access generated files
+      - ./output:/app/output
+      # Mount the current directory for development
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MPLBACKEND=Agg
+    # Override command if needed
+    # command: python moai_analyzer_plotly.py
