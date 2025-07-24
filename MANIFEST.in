@@ -1,0 +1,13 @@
+include README.md
+include CLAUDE.md
+include requirements.txt
+include environment.yml
+include LICENSE
+include figure_caption.txt
+include SimplifiedMoai.obj
+include *.png
+include *.svg
+include *.html
+recursive-include tests *.py
+global-exclude __pycache__
+global-exclude *.py[co]

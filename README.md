@@ -1,4 +1,8 @@
-# Hotuiti - Moai Center of Mass Analysis
+# 🗿 Hotuiti - Moai Center of Mass Analysis
+
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?logo=docker&logoColor=white)](https://www.docker.com/)
 
 A scientific analysis project that calculates and visualizes the center of mass of a Rapa Nui moai (Easter Island statue) to determine its stability and balance characteristics. This analysis provides insights into how these massive statues could have been transported and erected.
 
@@ -28,31 +32,37 @@ Our analysis reveals that the moai design is inherently stable:
 
 ```
 hotuiti/
-├── SimplifiedMoai.obj              # 3D model (5,150 vertices, 10,296 faces)
-├── README.md                       # This file
-├── CLAUDE.md                       # AI assistant guidance
-├── requirements.txt                # Python dependencies
-├── figure_caption.txt              # Scientific figure caption
 │
-├── Analysis Scripts/
-│   ├── moai_analyzer.py            # Original analysis implementation
-│   ├── moai_analyzer_corrected.py  # Improved with proper coordinate system
-│   ├── moai_analyzer_enhanced.py   # Enhanced with surface rendering
-│   ├── moai_analyzer_final.py      # Final version with all features
-│   ├── moai_analyzer_headless.py   # Server-friendly (no display required)
-│   ├── moai_analyzer_plotly.py     # Interactive 3D visualization
-│   ├── moai_analyzer_plotly_simple.py # Simplified Plotly version
-│   ├── calculate_lean_angle.py     # Lean angle calculations
-│   └── test_base_outline.py        # Base outline verification
+├── 📄 Core Files
+│   ├── SimplifiedMoai.obj              # 3D model (5,150 vertices, 10,296 faces)
+│   ├── README.md                       # Project documentation
+│   ├── CLAUDE.md                       # AI assistant guidance
+│   └── figure_caption.txt              # Scientific figure caption
 │
-└── Output Files/
-    ├── moai_analysis_corrected_600dpi.png    # High-res raster image
-    ├── moai_analysis_final_600dpi.png        # Final analysis visualization
-    ├── moai_analysis_enhanced_600dpi.png     # Enhanced rendering
-    ├── moai_analysis_corrected.svg           # Vector graphics
-    ├── moai_analysis_final.svg               # Final vector output
-    ├── moai_analysis_enhanced.svg            # Enhanced vector
-    └── moai_analysis_3d_interactive.html     # Interactive 3D view
+├── 🔧 Configuration & Setup
+│   ├── requirements.txt                # Pinned Python dependencies
+│   ├── environment.yml                 # Conda environment specification
+│   ├── .python-version                 # Python version (3.10.13)
+│   ├── Dockerfile                      # Container definition
+│   ├── docker-compose.yml              # Docker orchestration
+│   ├── setup.py                        # Package installation
+│   └── pyproject.toml                  # Modern Python packaging
+│
+├── 🐍 Analysis Scripts
+│   ├── moai_analyzer.py                # Original analysis implementation
+│   ├── moai_analyzer_corrected.py      # Improved coordinate system
+│   ├── moai_analyzer_enhanced.py       # Enhanced surface rendering
+│   ├── moai_analyzer_final.py          # Final version (recommended)
+│   ├── moai_analyzer_headless.py       # Server-friendly version
+│   ├── moai_analyzer_plotly.py         # Interactive 3D visualization
+│   ├── moai_analyzer_plotly_simple.py  # Simplified Plotly version
+│   ├── calculate_lean_angle.py         # Lean angle calculations
+│   └── test_base_outline.py            # Base outline verification
+│
+└── 📊 Output Files
+    ├── moai_analysis_*_600dpi.png      # High-resolution visualizations
+    ├── moai_analysis_*.svg             # Scalable vector graphics
+    └── moai_analysis_3d_interactive.html # Interactive 3D view
 ```
 
 ## 🚀 Quick Start
@@ -169,6 +179,13 @@ python moai_analyzer_headless.py
 For detailed tilt analysis:
 ```bash
 python calculate_lean_angle.py
+```
+
+### Quick Test
+Verify everything is working:
+```bash
+# Test basic functionality
+python -c "import trimesh; mesh = trimesh.load('SimplifiedMoai.obj'); print(f'Mesh loaded: {len(mesh.vertices)} vertices')"
 ```
 
 ## 📈 Understanding the Output
@@ -362,7 +379,8 @@ If you use this analysis in your research, please cite:
   title = {Hotuiti: Moai Center of Mass Analysis},
   author = {Lipo, Carl},
   year = {2024},
-  url = {https://github.com/clipo/hotuiti}
+  url = {https://github.com/clipo/hotuiti},
+  doi = {10.5281/zenodo.XXXXXXX}  # Add DOI when available
 }
 ```
 
